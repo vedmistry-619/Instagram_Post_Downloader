@@ -141,5 +141,53 @@ elif typename == "GraphSidecar":
 				downloadtext.set(new_t)
 
 		else:
-			
+						video_url = edge['node']['video_url']
+			download_p += ".mp4"
+
+			if not os.path.exists(download_p):
+				urllib.request.urlretrieve(video_url, download_p)
+
+				vid = cv2.VideoCapture(download_p)
+				ret,frame = vid.read()
+		
+				video_icon = download_path + "/Video Icons/" + str(file_name) + ".jpg"
+				cv2.imwrite(video_icon,frame)
+				icon = Image.open(video_icon)
+				icon = icon.resize((100,100), Image.ANTIALIAS)
+				icon = ImageTk.PhotoImage(icon)
+
+				imgLabel = Label(root)
+				imgLabel.grid(row = 4, column = i, padx = 1 , pady = 1)
+				imgLabel.config(image=image)
+				imgLabel.photo = image
+
+				prev_t = downloadtext.get()
+				new_t = prev_t + "\n" + str(file_name) + "-" + str(post_n) + ".mp4 DOWNLOADED"
+				root.downloadlabel.grid(row = 2, column = 0, columnspan = 2, padx = 1 , pady = 1)
+				downloadtext.set(new_t)
+				i+=1
+
+			else:
+				prev_t = downloadtext.get()
+				new_t = prev_t + "\n" + str(file_name) + "-" + str(post_n) + ".mp4 EXISTS"
+				root.downloadlabel.grid(row = 2, column = 0, columnspan = 2, padx = 1 , pady = 1)
+				downloadtext.set(new_t)
+
+		post_n += 1
+
+
+
+root = tk.Tk()
+
+root.geometry("600x400")
+root.title("Insta Downloader")
+root.config(background = "black")
+
+instaURL = StringVar()
+downloadtext = StringVar()
+
+CreateWidgets()
+
+root.mainloop()
+
 
