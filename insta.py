@@ -145,7 +145,7 @@ elif typename == "GraphSidecar":
 			download_p += ".mp4"
 
 			if not os.path.exists(download_p):
-				urllib.request.urlretrieve(video_url, download_p)
+				urllib.request.urlretrieve(video_url , download_p)
 
 				vid = cv2.VideoCapture(download_p)
 				ret,frame = vid.read()
