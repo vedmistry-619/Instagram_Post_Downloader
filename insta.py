@@ -24,10 +24,6 @@ def Object():
 	root.previewLabel = Label(root, text = "Preview", background = "deepskyblue4")
 	root.previewLabel.grid(row = 3, column = 0, padx= 5, pady = 5)
 
-
-
-
-
 def _download():
 	download_path = "What is your destiantion path folder??"
 	posts = requests.get(instaURL.get())
